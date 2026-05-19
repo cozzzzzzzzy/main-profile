@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aufa Website</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     *{
       margin:0;
@@ -416,7 +416,8 @@
       width: 100%;
       background: #050505;
       opacity: 1 !important;
-      overflow: hidden;
+      overflow: visible;
+      padding-bottom:220px;
     }
 
     /* Tombol Start Intro Awal */
@@ -730,6 +731,13 @@ body{
       border: none;
     }
 
+    .exp-intro-container .btn{
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
     .btn::before{
       content:"";
       position:absolute;
@@ -763,20 +771,211 @@ body{
       50%{ border-color:transparent; }
     }
 
-    /* =========================
-        FOOTER
-    ========================= */
-    footer{
-      text-align:center;
-      padding:40px 20px;
-      background:#050505;
-      color:#b49735;
-      font-size:14px;
-      letter-spacing:1px;
-      position: relative;
-      z-index: 100;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
+/* ===================================================
+   ULTRA CINEMATIC CONTACT BLEND
+=================================================== */
+/* ===================================================
+   CONTACT SECTION
+   SAME STYLE AS HERO → ABOUT
+=================================================== */
+
+.contact{
+  position:relative;
+
+  min-height:100vh;
+
+  padding:140px 20px 120px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      rgba(5,5,5,0.82),
+      rgba(5,5,5,0.82)
+    ),
+    url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+/* EXP → CONTACT BLEND */
+.contact::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:100%;
+  height:240px;
+
+  pointer-events:none;
+
+  z-index:2;
+
+  background:
+    linear-gradient(
+      to top,
+
+      rgba(5,5,5,0) 0%,
+      rgba(5,5,5,0.45) 45%,
+      rgba(5,5,5,1) 100%
+    );
+}
+
+/* CONTACT → FOOTER BLEND */
+.contact::after{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  width:100%;
+  height:240px;
+
+  pointer-events:none;
+
+  z-index:2;
+
+  background:
+    linear-gradient(
+      to bottom,
+
+      rgba(5,5,5,0) 0%,
+      rgba(5,5,5,0.45) 45%,
+      rgba(5,5,5,1) 100%
+    );
+}
+
+.contact *{
+  position:relative;
+  z-index:5;
+}
+
+/* ===================================================
+   FOOTER
+=================================================== */
+
+footer{
+  position:relative;
+
+  text-align:center;
+
+  padding:70px 20px 50px;
+
+  color:#b49735;
+
+  font-size:14px;
+
+  letter-spacing:1px;
+
+  overflow:hidden;
+
+  background:#050505;
+}
+
+
+.contact h2{
+  font-size:58px;
+  color:#d6b74d;
+  margin-bottom:20px;
+  position:relative;
+  z-index:2;
+}
+
+.contact p{
+  max-width:700px;
+  line-height:1.8;
+  color:rgba(255,255,255,0.75);
+  margin-bottom:50px;
+  position:relative;
+  z-index:2;
+}
+
+.contact-icons{
+  display:flex;
+  gap:28px;
+  flex-wrap:wrap;
+  justify-content:center;
+  position:relative;
+  z-index:2;
+}
+
+.contact-icons a{
+  width:74px;
+  height:74px;
+  border-radius:24px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+  color:white;
+  font-size:28px;
+
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(12px);
+
+  transition:
+    transform .35s ease,
+    background .35s ease,
+    box-shadow .35s ease,
+    border .35s ease;
+}
+
+.contact-icons a:hover{
+  transform:translateY(-10px) scale(1.08);
+
+  background:rgba(180,151,53,0.15);
+
+  border:1px solid rgba(231,204,107,0.5);
+
+  box-shadow:
+    0 10px 35px rgba(180,151,53,0.35),
+    0 0 25px rgba(180,151,53,0.25);
+}
+
+.contact-icons i{
+  transition:transform .35s ease;
+}
+
+.contact-icons a:hover i{
+  transform:scale(1.15);
+}
+
+/* MOBILE */
+@media (max-width:768px){
+
+
+  .contact h2{
+    font-size:40px;
+  }
+
+  .contact-icons{
+    gap:18px;
+  }
+
+  .contact-icons a{
+    width:64px;
+    height:64px;
+    font-size:24px;
+  }
+
+}
+
 
     /* =========================
         MOBILE RESPONSIVE HERO
@@ -1066,6 +1265,38 @@ body{
     </div>
   </section>
 
+
+<section class="contact" id="contact">
+
+  <h2>Contact Me</h2>
+
+  <p>
+    Feel free to connect, collaborate,
+    or simply say hello through my social media
+    and digital platforms.
+  </p>
+
+  <div class="contact-icons">
+
+    <a href="https://instagram.com/"
+       target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="https://facebook.com/"
+       target="_blank">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+
+    <a href="mailto:your@email.com">
+      <i class="fas fa-envelope"></i>
+    </a>
+
+  </div>
+
+</section>
+
+
   <footer id="contact">
     Salam Warm, Muhammad Aufa Maulana Fahmi
   </footer>
@@ -1251,9 +1482,52 @@ if (!isScrolling) {
       }, 1300);
     }
 
-    startExpBtn.addEventListener('click', () => {
-      triggerCinematicTransition();
-    });
+    
+/* =========================================
+   EXPERIENCE BUTTON MODE
+========================================= */
+
+let experienceOpened = false;
+
+startExpBtn.addEventListener('click', () => {
+
+  /* FIRST CLICK = CINEMATIC EXPERIENCE */
+  if (!experienceOpened) {
+
+    experienceOpened = true;
+
+    triggerCinematicTransition();
+
+    /* tombol berubah jadi HOME */
+    setTimeout(() => {
+      startExpBtn.textContent = "Home";
+    }, 700);
+
+  }
+
+  /* NEXT CLICK = GO HOME */
+  else {
+
+    syncSmoothScroll();
+
+    const target =
+      document.querySelector("#home");
+
+    const offset =
+      target.getBoundingClientRect().top +
+      window.pageYOffset - 90;
+
+    targetScroll = offset;
+
+    if (!isScrolling) {
+      isScrolling = true;
+      requestAnimationFrame(smoothScrollEngine);
+    }
+
+  }
+
+});
+
 
   /* ===================================================
    THEME OBSERVER LOGIC
