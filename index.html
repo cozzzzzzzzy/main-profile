@@ -19,11 +19,11 @@
       scroll-behavior:smooth;
     }
 
-    body{
-      background:#050505;
-      color:white;
-      overflow-x:hidden;
-    }
+   body{
+  background:#050505;
+  color:white;
+  overflow-x:hidden;
+}
 
     /* ===================================================
        EFEK FADE IN & FADE OUT PER SECTION (OPTIMIZED)
@@ -40,8 +40,7 @@
     section .hero-content,
     section h2,
     section .about-desc,
-    section .about-grid,
-    section .exp-container {
+    section .about-grid {
       filter: blur(5px);
       transition: filter 0.9s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: filter;
@@ -55,8 +54,7 @@
     section.appear .hero-content,
     section.appear h2,
     section.appear .about-desc,
-    section.appear .about-grid,
-    section.appear .exp-container {
+    section.appear .about-grid {
       filter: blur(0);
     }
 
@@ -113,7 +111,7 @@
     }
 
     /* ===================================================
-        HERO SECTION 
+       HERO SECTION 
     =================================================== */
     .hero{
       min-height:100vh;
@@ -411,76 +409,307 @@
     }
 
     /* ===================================================
-        EXPERIENCE SECTION
+        CINEMATIC NATURAL SCROLL EXPERIENCE SECTION
     =================================================== */
-    .experience{
-      min-height:100vh;
-      padding:140px 10%;
-      position:relative;
-      background: linear-gradient(rgba(5,5,5,0.85), rgba(20,10,0,0.65)), url('https://raw.githubusercontent.com/cozzzzzzzzy/main-profile/refs/heads/main/hitam1.png');
-      background-size:cover;
-      background-position:center -10%;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
-    }
-
-    .experience::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
+    .experience {
+      position: relative;
       width: 100%;
-      height: 220px;
-      pointer-events: none;
-      z-index: 10;
-      background: linear-gradient(to top, rgba(5,5,5,0) 0%, rgba(5,5,5,0.6) 60%, rgba(5,5,5,1) 100%);
+      background: #050505;
+      opacity: 1 !important;
+      overflow: hidden;
     }
 
-    .experience h2{
-      text-align:center;
-      font-size:58px;
-      color:#b49735;
-      margin-bottom:70px;
-      position:relative;
-      z-index:2;
+    /* Tombol Start Intro Awal */
+    .exp-intro-container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #050505;
     }
 
-    .exp-container{
-      max-width:950px;
-      margin:auto;
-      display:flex;
-      flex-direction:column;
-      gap:35px;
-      position:relative;
-      z-index:2;
+    .exp-intro-container h2 {
+      font-size: 58px;
+      color: #b49735;
+      margin-bottom: 25px;
     }
 
-    .exp-card{
-      padding:35px;
-      border-radius:24px;
-      background: rgba(255,255,255,0.06);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      border: 1px solid rgba(255,255,255,0.08);
-      transition:0.4s ease;
+    /* Master Wrapper List Konten Mengalir ke Bawah secara Alami */
+    .exp-natural-list {
+      display: none; 
+      width: 100%;
+      padding-bottom: 150px;
     }
 
-    .exp-card:hover{
-      transform:translateY(-10px);
-      background: rgba(180,151,53,0.12);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    .exp-natural-list.show {
+      display: block;
     }
 
-    .exp-card h3{
-      color:#d6b74d;
-      font-size:25px;
-      margin-bottom:18px;
+
+      body {
+  overflow-y: scroll;
+}
+
+
+    /* Setiap Blok Panel Card */
+    .exp-card-row {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 120px 15%;
+  position: relative;
+  perspective: 1400px;
+  overflow: visible;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+    /* Efek Zebra: membalik posisi kiri kanan baris genap */
+    .exp-card-row:nth-child(even) {
+      flex-direction: row-reverse;
     }
 
-    .exp-card p{
-      line-height:1.8;
-      font-size:17px;
-      color:rgba(255,255,255,0.9);
+    .exp-row-visual,
+.floating-decor-item,
+.exp-row-text{
+  backface-visibility:hidden;
+}
+
+    /* Deskripsi Teks (Berada di Belakang / Bidang Normal Halaman) */
+    .exp-row-text {
+      max-width: 460px;
+      z-index: 5;
+      position: relative;
+      will-change: transform, opacity;
+transition:none,
+  opacity 0.3s ease;
+    }
+
+          .exp-row-visual,
+.floating-decor-item{
+  contain: layout paint style;
+}
+
+
+    .exp-row-text span {
+      font-size: 18px;
+      color: #b49735;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .exp-row-text h1 {
+      font-size: 64px;
+      line-height: 1.1;
+      margin-bottom: 25px;
+      font-weight: 700;
+      transition: color 0.5s ease;
+    }
+
+    .exp-row-text p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* ===================================================
+        FOREGROUND FLOATING ENGINE (FOTO DI DEPAN LAYAR)
+    =================================================== */
+    .exp-row-visual {
+      position: relative;
+      width: 35vw;
+      height: 60vh;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 50px 100px rgba(0,0,0,0.95);
+      z-index: 30; /* Di depan teks */
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transform: translateY(0);
+      transform-style: preserve-3d;
+      perspective: 2000px;
+      transition: none;
+      transform: translate3d(0,0,0);
+    }
+
+    .floating-decor-item{
+  position:absolute;
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 30px 60px rgba(0,0,0,0.85);
+  z-index:35;
+  background-size:cover;
+  background-position:center;
+  will-change:transform;
+  transition: none;
+  transform: translateZ(0);
+}
+
+    /* Posisi acak elemen foto ekstra */
+    /* KIRI ATAS */
+.decor-1{
+  width:13vw;
+  height:22vh;
+  top:-8%;
+  left:2%;
+}
+
+/* KANAN TENGAH */
+.decor-2{
+  width:11vw;
+  height:20vh;
+  top:32%;
+  right:1%;
+}
+
+/* TENGAH ATAS */
+.decor-3{
+  width:12vw;
+  height:18vh;
+  top:-12%;
+  left:42%;
+}
+
+/* KIRI BAWAH */
+.decor-4{
+  width:14vw;
+  height:23vh;
+  bottom:-5%;
+  left:6%;
+}
+
+/* KANAN ATAS */
+.decor-5{
+  width:10vw;
+  height:18vh;
+  top:5%;
+  right:18%;
+}
+
+/* TENGAH BAWAH */
+.decor-6{
+  width:12vw;
+  height:20vh;
+  bottom:-10%;
+  left:45%;
+}
+
+/* EXTRA KIRI */
+.decor-7{
+  width:11vw;
+  height:19vh;
+  top:55%;
+  left:-2%;
+}
+
+/* EXTRA KANAN */
+.decor-8{
+  width:13vw;
+  height:21vh;
+  bottom:8%;
+  right:-1%;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:#050505;
+  transition:
+    background-color 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* THEMES */
+body.theme-academic::before{
+  background:#080705;
+}
+
+body.theme-creative::before{
+  background:#050809;
+}
+
+body.theme-life::before{
+  background:#060905;
+}
+
+body.theme-community::before{
+  background:#090508;
+}
+
+
+html,
+body{
+  overscroll-behavior:none;
+}
+
+body{
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+    /* VARIASI STRUKTUR WARNA TEMA UNTUK BODY BACKGROUND */
+
+    .theme-academic .exp-row-text h1 { color: #d6b74d; }
+    
+
+    .theme-creative .exp-row-text h1 { color: #4db3d6; }
+    
+  
+    .theme-life .exp-row-text h1 { color: #6bd64d; }
+    
+  
+    .theme-community .exp-row-text h1 { color: #d64da9; }
+
+    /* Pengaturan Kustom Mode Responsif Smartphone */
+    @media (max-width: 768px) {
+      .exp-card-row, .exp-card-row:nth-child(even) {
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 50px;
+        padding: 80px 6%;
+        min-height: auto;
+      }
+      .exp-row-text h1 { font-size: 36px; margin-bottom: 15px; }
+      .exp-row-visual { width: 85vw; height: 40vh; z-index: 5; }
+      .exp-intro-container h2 { font-size: 36px; }
+      .floating-decor-item { display: none; } /* Matikan dekorasi di mobile agar tidak berantakan */
+    }
+
+    /* ===================================================
+        HIGH-END ELEGANT SCREEN COVER (TIRAI PREMIUM)
+    =================================================== */
+    .screen-cover{
+      position:fixed;
+      inset:0;
+      background:#080808;
+      z-index:99998; 
+      transform:translateX(-100%);
+      pointer-events:none;
+      will-change: transform;
+    }
+
+    .screen-cover.animate{
+      animation:coverMove 1.3s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+    }
+
+    @keyframes coverMove{
+      0%{ transform:translateX(-100%); }
+      45%{ transform:translateX(0%); }
+      55%{ transform:translateX(0%); }
+      100%{ transform:translateX(100%); }
     }
 
     /* BUTTON GENERICS */
@@ -497,6 +726,8 @@
       transition: transform 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
       z-index:1;
+      cursor: pointer;
+      border: none;
     }
 
     .btn::before{
@@ -548,7 +779,7 @@
     }
 
     /* =========================
-        MOBILE RESPONSIVE
+        MOBILE RESPONSIVE HERO
     ========================= */
     @media (max-width:992px){
       .bg-card {
@@ -569,8 +800,6 @@
       nav a{ font-size:14px; padding:8px 14px; }
       .hero h1{ font-size:42px; }
       .about{ padding:100px 8%; }
-      .about h2, .experience h2{ font-size:42px; }
-      .experience{ padding:100px 8%; }
       .about, .experience{ background-attachment:scroll; }
       .bg-card {
         width: 85vw;
@@ -643,7 +872,6 @@
 </head>
 
 <body>
-  <!-- LOADING SCREEN -->
   <div class="loader" id="loader">
     <div class="loader-logo">COZZZZZZZY</div>
     <div class="loader-bar">
@@ -651,7 +879,6 @@
     </div>
   </div>
 
-  <!-- HEADER -->
   <header>
     <div class="logo">COZZZZZZZY</div>
     <nav>
@@ -662,7 +889,6 @@
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
   <section class="hero" id="home">
     <div class="hero-bg-deck">
       <div class="bg-card pos-center" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');"></div>
@@ -683,7 +909,6 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section class="about" id="about">
     <h2>About Me</h2>
     <p class="about-desc">
@@ -745,33 +970,107 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section class="experience" id="experience">
-    <h2>Journey & Experience</h2>
-    <div class="exp-container">
-      <div class="exp-card">
-        <h3>Academic Journey</h3>
-        <p>Educational journey, learning experiences, academic projects, and skills developed over time.</p>
+    
+    <div class="exp-intro-container" id="expIntroContainer">
+      <h2>Journey & Experience</h2>
+      <button class="btn" id="startExpBtn">See Experiences</button>
+    </div>
+
+    <div class="exp-natural-list" id="expNaturalList">
+      
+      <div class="exp-card-row" data-theme="theme-academic">
+        <div class="exp-row-text">
+          <span>(01)</span>
+          <h1>Academic Journey</h1>
+          <p>
+            Mathematics Education student focused on learning innovation,
+            research exploration, and academic development.
+          </p>
+        </div>
+        <div class="exp-row-visual" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');"></div>
+        <div class="floating-decor-item decor-1" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg2.jpeg?raw=true');"></div>
+        <div class="floating-decor-item decor-2" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg3.jfif?raw=true');"></div>
+      <div class="floating-decor-item decor-5" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');"></div>
+
+<div class="floating-decor-item decor-6" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg2.jpeg?raw=true');"></div>
+
+<div class="floating-decor-item decor-7" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg3.jfif?raw=true');"></div>
+
+<div class="floating-decor-item decor-8" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/hitam1.png?raw=true');"></div>
       </div>
-      <div class="exp-card">
-        <h3>Creative & Digital Experience</h3>
-        <p>Personal creations, digital exploration, visual ideas, and creative projects developed through experimentation.</p>
+
+      <div class="exp-card-row" data-theme="theme-creative">
+        <div class="exp-row-text">
+          <span>(02)</span>
+          <h1>Creative & Digital</h1>
+          <p>
+            Exploring cinematic UI design, AI creativity,
+            interactive web design, and modern visual experiences.
+          </p>
+        </div>
+        <div class="exp-row-visual" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg2.jpeg?raw=true');"></div>
+        <div class="floating-decor-item decor-3" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/hitam1.png?raw=true');"></div>
+        <div class="floating-decor-item decor-4" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');"></div>
+      <div class="floating-decor-item decor-5" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');"></div>
+
+<div class="floating-decor-item decor-6" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg2.jpeg?raw=true');"></div>
+
+<div class="floating-decor-item decor-7" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg3.jfif?raw=true');"></div>
+
+<div class="floating-decor-item decor-8" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/hitam1.png?raw=true');"></div>
       </div>
-      <div class="exp-card">
-        <h3>Life & Personal Experience</h3>
-        <p>Personal growth, hobbies, everyday experiences, and moments that shaped perspective and character.</p>
+
+      <div class="exp-card-row" data-theme="theme-life">
+        <div class="exp-row-text">
+          <span>(03)</span>
+          <h1>Life Experience</h1>
+          <p>
+            Personal growth, hobbies, calm observation,
+            nature interests, and self-development experiences.
+          </p>
+        </div>
+        <div class="exp-row-visual" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg3.jfif?raw=true');"></div>
+        <div class="floating-decor-item decor-1" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg2.jpeg?raw=true');"></div>
+        <div class="floating-decor-item decor-2" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/hitam1.png?raw=true');"></div>
+      <div class="floating-decor-item decor-5" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');"></div>
+
+<div class="floating-decor-item decor-6" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg2.jpeg?raw=true');"></div>
+
+<div class="floating-decor-item decor-7" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg3.jfif?raw=true');"></div>
+
+<div class="floating-decor-item decor-8" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/hitam1.png?raw=true');"></div>
       </div>
-      <div class="exp-card">
-        <h3>Community & Collaboration</h3>
-        <p>Teamwork, communities, social interaction, and collaborative experiences shared with others.</p>
+
+      <div class="exp-card-row" data-theme="theme-community">
+        <div class="exp-row-text">
+          <span>(04)</span>
+          <h1>Collaboration</h1>
+          <p>
+            Team projects, collaborative experiences,
+            communication, and social interaction.
+          </p>
+        </div>
+        <div class="exp-row-visual" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/hitam1.png?raw=true');"></div>
+        <div class="floating-decor-item decor-3" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');"></div>
+        <div class="floating-decor-item decor-4" style="background-image: url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg3.jfif?raw=true');"></div>
+      <div class="floating-decor-item decor-5" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg1(1).png?raw=true');"></div>
+
+<div class="floating-decor-item decor-6" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg2.jpeg?raw=true');"></div>
+
+<div class="floating-decor-item decor-7" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/bg3.jfif?raw=true');"></div>
+
+<div class="floating-decor-item decor-8" style="background-image:url('https://github.com/cozzzzzzzzy/main-profile/blob/main/hitam1.png?raw=true');"></div>
       </div>
+
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer id="contact">
     Salam Warm, Muhammad Aufa Maulana Fahmi
   </footer>
+
+  <div class="screen-cover" id="screenCover"></div>
 
   <script>
     /* 1. TYPING EFFECT */
@@ -834,39 +1133,40 @@
       setTimeout(() => loader.classList.add("hide"), 2400);
     });
 
-    /* 4. HIGH-PERFORMANCE SMOOTH SCROLL */
+    /* 4. HIGH-PERFORMANCE SMOOTH SCROLL (NORMAL UNTUK NAV) */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute("href");
-        if (targetId === "#") return;
-        const target = document.querySelector(targetId);
-        if (target) {
-          const headerOffset = 90; 
-          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-          const startPosition = window.pageYOffset;
-          const distance = targetPosition - startPosition;
-          let startTime = null;
-          const duration = 1000; 
+  anchor.addEventListener("click", function(e) {
 
-          function easeInOutCubic(t, b, c, d) {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t * t + b;
-            t -= 2;
-            return c / 2 * (t * t * t + 2) + b;
-          }
+    e.preventDefault();
 
-          function animation(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) requestAnimationFrame(animation);
-          }
-          requestAnimationFrame(animation);
-        }
-      });
-    });
+    syncSmoothScroll();
+
+    const targetId = this.getAttribute("href");
+
+    if (targetId === "#") return;
+
+    const target = document.querySelector(targetId);
+
+    if (target) {
+
+      const headerOffset = 90;
+
+      const targetPosition =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerOffset;
+
+      targetScroll = targetPosition;
+
+      if (!isScrolling) {
+        isScrolling = true;
+        requestAnimationFrame(smoothScrollEngine);
+      }
+
+    }
+
+  });
+});
 
     /* 5. BACKGROUND 3D SHUFFLE DECK ENGINE LOGIC */
     let deck = Array.from(document.querySelectorAll('.bg-card'));
@@ -879,32 +1179,26 @@
 
       if(!center || !right || !left) return;
 
-      /* FRONT -> OUT */
       center.classList.remove('pos-center');
       center.classList.add('shuffle-out');
 
-      /* RIGHT -> CENTER */
       right.classList.remove('pos-right');
       right.classList.add('pos-center');
 
-      /* LEFT -> RIGHT */
       left.classList.remove('pos-left');
       left.classList.add('pos-right');
 
-      /* RESET CARD YANG KELUAR */
       setTimeout(() => {
         center.classList.remove('shuffle-out');
         center.style.transition = 'none';
         center.classList.add('pos-left');
-        
-        /* FORCE REFLOW */
         void center.offsetWidth;
         center.style.transition = '';
       }, 580);
     }
     setInterval(shuffleDeck, intervalTime);
 
-    /* 6. INTERSECTION OBSERVER ENGINE (ANTI-LAG) */
+    /* 6. INTERSECTION OBSERVER ENGINE GENERAL */
     const observerOptions = {
       root: null,
       threshold: 0.15, 
@@ -924,6 +1218,411 @@
     document.querySelectorAll("section").forEach(section => {
       sectionObserver.observe(section);
     });
+
+    /* ===================================================
+        CINEMATIC SCREEN-COVER REVEAL FOR SEE EXPERIENCE BUTTON
+    =================================================== */
+    const startExpBtn = document.getElementById('startExpBtn');
+    const expNaturalList = document.getElementById('expNaturalList');
+    const cardRows = document.querySelectorAll('.exp-card-row');
+    const screenCover = document.getElementById('screenCover');
+
+    function triggerCinematicTransition() {
+      screenCover.classList.add('animate');
+
+      // Pemuatan konten tepat di tengah-tengah tirai menutup layar penuh
+      setTimeout(() => {
+        expNaturalList.classList.add('show');
+        
+        const firstRow = cardRows[0];
+        const offsetPosition = firstRow.getBoundingClientRect().top + window.pageYOffset - 100;
+        syncSmoothScroll();
+
+targetScroll = offsetPosition;
+
+if (!isScrolling) {
+  isScrolling = true;
+  requestAnimationFrame(smoothScrollEngine);
+}
+      }, 550);
+
+      setTimeout(() => {
+        screenCover.classList.remove('animate');
+      }, 1300);
+    }
+
+    startExpBtn.addEventListener('click', () => {
+      triggerCinematicTransition();
+    });
+
+  /* ===================================================
+   THEME OBSERVER LOGIC
+=================================================== */
+const themeObserverOptions = {
+  root: null,
+  threshold: 0.4,
+  rootMargin: "-10% 0px -20% 0px"
+};
+
+const themeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+
+  const theme =
+    entry.target.getAttribute('data-theme');
+
+  document.body.classList.remove(
+    "theme-academic",
+    "theme-creative",
+    "theme-life",
+    "theme-community"
+  );
+
+  document.body.classList.add(theme);
+
+}
+  });
+}, themeObserverOptions);
+
+cardRows.forEach(row => {
+  themeObserver.observe(row);
+});
+
+
+/* ===================================================
+   CINEMATIC EXPERIENCE PARALLAX
+   ULTRA SMOOTH INERTIA VERSION
+=================================================== */
+
+const expRows = document.querySelectorAll(".exp-card-row");
+
+let mouseX = 0;
+let mouseY = 0;
+
+window.addEventListener("mousemove", (e) => {
+  mouseX = (e.clientX / window.innerWidth - 0.5);
+  mouseY = (e.clientY / window.innerHeight - 0.5);
+});
+
+/* =========================================
+   SMOOTH LERP ENGINE
+========================================= */
+
+function lerp(start, end, factor) {
+  return start + (end - start) * factor;
+}
+
+/* =========================================
+   STORE CURRENT VALUES
+========================================= */
+
+const smoothData = [];
+
+expRows.forEach((row) => {
+
+  smoothData.push({
+
+    row,
+
+    visual: {
+      x: 0,
+      y: 0,
+      rx: 0,
+      ry: 0,
+      scale: 1
+    },
+
+    text: {
+      x: 0,
+      y: 0,
+      opacity: 1
+    },
+
+    decors: Array.from(
+      row.querySelectorAll(".floating-decor-item")
+    ).map(() => ({
+      x: 0,
+      y: 0,
+      rotate: 0,
+      scale: 1
+    }))
+
+  });
+
+});
+
+/* =========================================
+   MAIN ENGINE
+========================================= */
+
+function cinematicParallax() {
+
+  const viewportH = window.innerHeight;
+
+  smoothData.forEach((item) => {
+
+    const row = item.row;
+
+    const rect = row.getBoundingClientRect();
+
+    if(rect.top < viewportH && rect.bottom > 0){
+
+      const progress =
+        (viewportH - rect.top) /
+        (viewportH + rect.height);
+
+      const centered = progress - 0.5;
+
+      /* =========================================
+         TARGET VALUES
+      ========================================= */
+
+      const targetVisualY = centered * -140;
+      const targetVisualX = mouseX * 40;
+
+      const targetRotateY = mouseX * 20;
+      const targetRotateX = mouseY * -10;
+
+      const targetScale =
+        1 + Math.abs(centered) * 0.08;
+
+      /* =========================================
+         LERP VISUAL
+      ========================================= */
+
+      item.visual.x = lerp(
+        item.visual.x,
+        targetVisualX,
+        0.08
+      );
+
+      item.visual.y = lerp(
+        item.visual.y,
+        targetVisualY,
+        0.08
+      );
+
+      item.visual.ry = lerp(
+        item.visual.ry,
+        targetRotateY,
+        0.06
+      );
+
+      item.visual.rx = lerp(
+        item.visual.rx,
+        targetRotateX,
+        0.06
+      );
+
+      item.visual.scale = lerp(
+        item.visual.scale,
+        targetScale,
+        0.06
+      );
+
+      const visual =
+        row.querySelector(".exp-row-visual");
+
+      visual.style.transform = `
+        translate3d(
+          ${item.visual.x}px,
+          ${item.visual.y}px,
+          0
+        )
+        rotateY(${item.visual.ry}deg)
+        rotateX(${item.visual.rx}deg)
+        scale(${item.visual.scale})
+      `;
+
+      /* =========================================
+         TEXT
+      ========================================= */
+
+      const targetTextY = centered * -55;
+      const targetTextX = mouseX * 18;
+      const targetOpacity =
+        1 - Math.abs(centered) * 0.45;
+
+      item.text.x = lerp(
+        item.text.x,
+        targetTextX,
+        0.08
+      );
+
+      item.text.y = lerp(
+        item.text.y,
+        targetTextY,
+        0.08
+      );
+
+      item.text.opacity = lerp(
+        item.text.opacity,
+        targetOpacity,
+        0.08
+      );
+
+      const text =
+        row.querySelector(".exp-row-text");
+
+      text.style.transform = `
+        translate3d(
+          ${item.text.x}px,
+          ${item.text.y}px,
+          0
+        )
+      `;
+
+      text.style.opacity =
+        item.text.opacity;
+
+      /* =========================================
+         DECOR ITEMS
+      ========================================= */
+
+      const decors =
+        row.querySelectorAll(".floating-decor-item");
+
+      decors.forEach((decor, index) => {
+
+        const depth =
+          60 + (index * 18);
+
+        const targetY =
+          centered * depth * -2.2;
+
+        const targetX =
+          mouseX * (25 + index * 4);
+
+        const targetRotate =
+          centered * 18 *
+          (index % 2 ? 1 : -1);
+
+        const targetScale =
+          1 + Math.abs(centered) * 0.06;
+
+        const float =
+          Math.sin(
+            performance.now() * 0.0015 +
+            index
+          ) * 12;
+
+        const state =
+          item.decors[index];
+
+        state.x = lerp(
+          state.x,
+          targetX,
+          0.06
+        );
+
+        state.y = lerp(
+          state.y,
+          targetY,
+          0.06
+        );
+
+        state.rotate = lerp(
+          state.rotate,
+          targetRotate,
+          0.06
+        );
+
+        state.scale = lerp(
+          state.scale,
+          targetScale,
+          0.06
+        );
+
+        decor.style.transform = `
+          translate3d(
+            ${state.x}px,
+            ${state.y + float}px,
+            0
+          )
+          rotate(${state.rotate}deg)
+          scale(${state.scale})
+        `;
+
+      });
+
+    }
+
+  });
+
+  requestAnimationFrame(cinematicParallax);
+}
+
+/* START ENGINE */
+cinematicParallax();
+
+
+/* ===================================================
+   ULTRA SMOOTH CINEMATIC SCROLL
+=================================================== */
+
+let currentScroll = window.pageYOffset;
+let targetScroll = window.pageYOffset;
+let isScrolling = false;
+
+function syncSmoothScroll() {
+  currentScroll = window.pageYOffset;
+  targetScroll = window.pageYOffset;
+}
+
+/* SPEED */
+const scrollEase = 0.075;
+window.addEventListener("scroll", () => {
+
+  if (!isScrolling) {
+    currentScroll = window.pageYOffset;
+    targetScroll = window.pageYOffset;
+  }
+
+});
+/* WHEEL CAPTURE */
+window.addEventListener("wheel", (e) => {
+
+  e.preventDefault();
+
+  targetScroll += e.deltaY*0.7;
+
+  const maxScroll =
+    document.body.scrollHeight - window.innerHeight;
+
+  targetScroll = Math.max(
+    0,
+    Math.min(targetScroll, maxScroll)
+  );
+
+  if (!isScrolling) {
+    isScrolling = true;
+    requestAnimationFrame(smoothScrollEngine);
+  }
+
+}, { passive:false });
+
+/* ENGINE */
+function smoothScrollEngine() {
+
+  currentScroll +=
+    (targetScroll - currentScroll) * scrollEase;
+
+  if (Math.abs(targetScroll - currentScroll) < 0.1) {
+    currentScroll = targetScroll;
+  }
+
+  window.scrollTo(0, currentScroll);
+
+  if (Math.abs(targetScroll - currentScroll) > 0.1) {
+    requestAnimationFrame(smoothScrollEngine);
+  } else {
+    isScrolling = false;
+  }
+}
+
+
+
   </script>
 </body>
+
 </html>
